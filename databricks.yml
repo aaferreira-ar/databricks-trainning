@@ -1,0 +1,32 @@
+# Databricks Asset Bundle configuration, more info here: https://docs.databricks.com/en/dev-tools/bundles/settings.html
+bundle:
+  name: "trainning"
+
+include:
+  - resources/*.yml
+  - resources/*/*.yml
+
+# The 'dev' target, used for development deployment.
+dev:
+  mode: development
+  default: true
+  workspace:
+    host: https://2890768527660490.0.gcp.databricks.com
+    # We always use /Users/aaferreira.lab06@gmail.com for all resources to make sure we only have a single copy.
+    root_path: /Users/aaferreira.lab06@gmail.com/.bundle/${bundle.name}/${bundle.target}
+  run_as:
+    # This runs as aaferreira.lab06@gmail.com in production. We could also use a service principal here,
+    # see https://docs.databricks.com/dev-tools/bundles/permissions.html.
+    user_name: aaferreira.lab06@gmail.com
+
+# The 'prd' target, used for production deployment.
+prd:
+  mode: production
+  workspace:
+    host: https://2890768527660490.0.gcp.databricks.com
+    # We always use /Users/aaferreira.lab06@gmail.com for all resources to make sure we only have a single copy.
+    root_path: /Users/aaferreira.lab06@gmail.com/.bundle/${bundle.name}/${bundle.target}
+  run_as:
+    # This runs as aaferreira.lab06@gmail.com in production. We could also use a service principal here,
+    # see https://docs.databricks.com/dev-tools/bundles/permissions.html.
+    user_name: aaferreira.lab06@gmail.com

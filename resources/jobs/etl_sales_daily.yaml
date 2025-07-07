@@ -1,0 +1,23 @@
+resources:
+  jobs:
+    etl_sales_daily:
+      name: etl_sales_daily
+      tasks:
+        - task_key: load_customers
+          notebook_task:
+            notebook_path: ../scr/02-ETL/01.load.customers
+            source: WORKSPACE
+        - task_key: load_sales
+          notebook_task:
+            notebook_path: ../scr/02-ETL/02.load.sales
+            source: WORKSPACE
+        - task_key: sales_report
+          depends_on:
+            - task_key: load_customers
+            - task_key: load_sales
+          notebook_task:
+            notebook_path: ../scr/02-ETL/03.update.sales.report
+            source: WORKSPACE
+      queue:
+        enabled: true
+      performance_target: STANDARD
