@@ -1,0 +1,13 @@
+# The main pipeline for trainning
+resources:
+  pipelines:
+    trainning_pipeline:
+      name: trainning_pipeline
+      catalog: dbk_lab_06br
+      schema: trainning_${bundle.target}
+      libraries:
+        - notebook:
+            path: ../src/dlt_pipeline.ipynb
+
+      configuration:
+        bundle.sourcePath: ${workspace.file_path}/src
